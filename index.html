@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kewin Mejer PassWord Manager</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <h3>PassWord Manager - KEWIN MEJER</h3>
+    </header>
+    <div id="main">
+        <h2>Dodawanie Danych</h2><br>
+            <p>Platforma</p>
+        <input id="Do" type="text"><br>
+            <p>Login</p>
+        <input id="login" type="text"><br>
+
+            <p>Hasło</p>
+        <input id="hasło" type="text"><br>
+        <br>
+        <button id="zapisz">Zapisz Dane</button><br>
+        <br>
+
+        <h2>Usuwanie Danych</h2>
+            <p>Platforma</p>
+        <input id="Do2" type="text"><br>
+        <br>
+        <button id="usuń">Usuń dane</button>
+    </div>
+
+    <div id="lista">
+        <h2>Lista Lokalna</h2><br>
+    </div>
+    
+</body>
+<script>
+    const loginT = document.getElementById("login");
+    const hasłoT = document.getElementById("hasło");
+    const zapisz = document.getElementById("zapisz");
+    const loginT2 = document.getElementById("login2");
+    const hasłoT2 = document.getElementById("hasło2");
+    const usuń = document.getElementById("usuń");
+    const lista = document.getElementById("lista");
+    const dlaT = document.getElementById("Do");
+    const dlaT2 = document.getElementById("Do2");
+
+
+    zapisz.onclick = function (){
+        const login = loginT.value;
+        const hasło = hasłoT.value;
+        const dla = dlaT.value;
+
+        if (login && hasło) {
+            let Dane = {
+            login: login,
+            hasło: hasło
+        };
+        
+        let Dane_serialized = JSON.stringify(Dane);
+        localStorage.setItem(dla, Dane_serialized);
+        location.reload();
+        }
+
+    };
+    usuń.onclick = function (){
+        const dla2 = dlaT2.value;
+        localStorage.removeItem(dla2);
+        location.reload();
+    };
+    for (let i = 0; i < localStorage.length; i++){
+
+    const key = localStorage.key(i);
+    const value = localStorage.getItem(key);
+    lista.innerHTML += `${key}: ${value}<br>`;
+    };
+</script>
+</html>
